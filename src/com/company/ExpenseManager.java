@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import com.company.model.Expense;
 import com.company.io.InputOutputJava;
+import com.company.WriterReader;
 
 public class ExpenseManager {
     private InputOutputJava io;
@@ -70,15 +71,11 @@ public class ExpenseManager {
     }
 
     public void showExpense(){
+        WriterReader r = new WriterReader();
         io.printMessageln("");
         io.printMessageln("---------------------------------------------");
-        if(!currentList.isEmpty()){
-            io.printMessageln("To-Do List:");
-            int number=0;
-            for(String item: currentList){
-                io.printMessageln(++number+ ". " +item);
-            }
-        }else{
+        boolean isItemExist = r.readObject();
+        if(!isItemExist){
             io.printMessageln("Expense list is empty!!!");
         }
 
@@ -87,7 +84,6 @@ public class ExpenseManager {
 
     public void addExpense() throws ParseException {
         Scanner sc = new Scanner(System.in);
-        io.printMessage("Enter the expense:\n===========");
         io.printMessage("Enter the expense:\n===========");
         io.printMessage("Enter Date:");
         String dateEntered = sc.next();
@@ -112,8 +108,12 @@ public class ExpenseManager {
         expense.setTheMerchant(merchant);
         expense.setThePaymentMethod(paymentMethod);
         expense.setTheTags(tags);
-        String itemList = expense.getItem();
-        currentList.add(itemList);
+        WriterReader w = new WriterReader();
+        w.writeObject(expense);
+        //w.readObject();
+        //String itemList = expense.getItem();
+        //currentList.add(itemList);
+
         io.printMessageln("Item has been added into the expense list.");
         io.printMessageln("========================");
 

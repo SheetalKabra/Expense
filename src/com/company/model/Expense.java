@@ -1,8 +1,9 @@
 package com.company.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Expense {
+public class Expense implements Serializable {
     private Date theDate;
     private String theCat;
     private double theAmount;
@@ -13,6 +14,10 @@ public class Expense {
 
     public String getItem(){
         return theDate+ ", "+theCat+", "+theAmount+", "+theDesc+", "+theMerchant+", "+thePaymentMethod+", "+theTags;
+    }
+
+    public String toString(){
+        return "Date: "+theDate+ "\nCategory: "+theCat+"\nAmount: "+theAmount+"\nDescription: "+theDesc+"\nMerchant: "+theMerchant+"\nPayment Method: "+thePaymentMethod+"\nTags: "+theTags;
     }
 
     public Date getTheDate() {
